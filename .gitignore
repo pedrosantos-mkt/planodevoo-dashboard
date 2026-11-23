@@ -1,0 +1,6 @@
+raw/
+.vercel
+.DS_Store
+__pycache__/
+.env*
+site/data.json

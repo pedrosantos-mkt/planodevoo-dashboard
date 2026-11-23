@@ -1,0 +1,11 @@
+{
+  "nome": "Plano de Voo 2027",
+  "subtitulo": "Live 14/12 · Gratuito · Metas de Performance",
+  "conta": "act_171474008015977",
+  "filtro_campanha": "[PLANODEVOO]",
+  "form_hubspot": "c99a5fdc-6ddd-41f8-a7c9-4a56d0c9f74a",
+  "inicio": "2026-11-17",
+  "fim": "2026-12-14",
+  "paginas": {"plano-de-voo-2027": "LP V1", "plano-de-voo-v2": "LP V2"},
+  "metas": {"investimento": 200000, "cpm": 61, "ctr": 1.0, "connect": 75, "conv_pagina": 20, "tx_qualif": 50, "cpl": 41, "cpq": 82}
+}

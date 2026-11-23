@@ -1,0 +1,37 @@
+name: Atualizar painel Plano de Voo
+
+on:
+  schedule:
+    - cron: '47 0,9,12,15,18,21 * * *'   # 6h47, 9h47, 12h47, 15h47, 18h47 e 21h47 de Brasília (UTC-3); sem madrugada
+  workflow_dispatch: {}
+
+concurrency:
+  group: atualizar
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  atualizar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - run: pip install requests
+      - name: Coletar Meta e HubSpot
+        env:
+          META_TOKEN: ${{ secrets.META_TOKEN }}
+          HUBSPOT_TOKEN: ${{ secrets.HUBSPOT_TOKEN }}
+        run: ./atualizar.sh
+      - name: Publicar na Vercel (os dados não ficam no GitHub)
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_ORG_ID: team_d3lbulDpm0oan3IzFejyQUYn
+          VERCEL_PROJECT_ID: prj_NKAc7aclm3UpNC6FSTD19zBSNMbH
+        run: |
+          if [ -z "$VERCEL_TOKEN" ]; then echo "Sem VERCEL_TOKEN"; exit 1; fi
+          npx --yes vercel@59.1.4 deploy --prod --yes --token "$VERCEL_TOKEN"

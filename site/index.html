@@ -1,0 +1,320 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Plano de Voo — Metas de Performance</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#060a15;--bg2:#0a1124;--card:#0d1530;--card2:#111a33;--line:rgba(255,255,255,.08);--line2:rgba(255,255,255,.14);
+  --tx:#eef1f8;--tx2:#c3cbe0;--tx3:#9aa6c3;--gold:#ffc46b;--gold2:#ffe3a3;--goldbg:rgba(255,196,107,.10);
+  --grad:linear-gradient(92deg,#ffe3a3 0%,#ffc46b 50%,#e9a24c 100%);
+  --good:#3ddc97;--goodbg:rgba(61,220,151,.13);--bad:#ff5a4e;--badbg:rgba(255,90,78,.13);--sun:#ff8a3d;
+  --ft:"Bricolage Grotesque",Helvetica,Arial,sans-serif;--fb:"Instrument Sans",Helvetica,Arial,sans-serif;
+}
+:root[data-theme="light"]{
+  --bg:#f7f2e8;--bg2:#efe8da;--card:#fffdf8;--card2:#f7f1e4;--line:#e7dfcf;--line2:#d6cbb6;
+  --tx:#141a2b;--tx2:#4a5168;--tx3:#7a8199;--gold:#b77a1f;--gold2:#8f5c12;--goldbg:rgba(183,122,31,.10);
+  --grad:linear-gradient(92deg,#c98a2c 0%,#a86d16 100%);
+  --good:#14935c;--goodbg:rgba(20,147,92,.10);--bad:#d6382d;--badbg:rgba(214,56,45,.09);
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{overflow-x:hidden}
+body{background:var(--bg);color:var(--tx);font:14px/1.45 var(--fb);-webkit-font-smoothing:antialiased}
+.mono{font-family:'JetBrains Mono',ui-monospace,monospace}
+header{background:radial-gradient(120% 140% at 70% -40%,#2a3b66 0%,#0a1124 55%,var(--bg) 100%);border-bottom:1px solid var(--line)}
+:root[data-theme="light"] header{background:radial-gradient(120% 140% at 70% -40%,#e9dcc0 0%,#f2eadb 55%,var(--bg) 100%)}
+.tk{min-width:0;display:flex;align-items:stretch;background:#f4f5f8;color:#141a2b;border-radius:14px;overflow:hidden;position:relative;box-shadow:0 10px 40px rgba(0,0,0,.35)}
+:root[data-theme="light"] .tk{box-shadow:0 8px 28px rgba(20,26,43,.12);background:#fff}
+.tk .lg{padding:14px 22px 14px 20px;border-right:2px dashed #3a4566;display:flex;flex-direction:column;justify-content:center;position:relative}
+.tk .lg::before,.tk .lg::after{content:"";position:absolute;right:-9px;width:16px;height:16px;border-radius:50%;background:var(--bg)}
+.tk .lg::before{top:-8px}.tk .lg::after{bottom:-8px}
+.tk .lg .a{font:600 11px var(--fb);letter-spacing:.06em;display:flex;align-items:flex-end;gap:6px}
+.tk .lg .vb{font:800 30px/0.95 var(--ft);letter-spacing:-.02em}.tk .lg .vb span{font-weight:600}
+.tk .inf{display:flex;gap:28px;align-items:center;padding:12px 24px;flex:1;flex-wrap:wrap}
+.tk .inf div{font:500 10px 'JetBrains Mono',monospace;letter-spacing:.14em;text-transform:uppercase;color:#4a5168}
+.tk .inf b{display:block;font:700 15px var(--fb);letter-spacing:.02em;color:#141a2b;margin-top:2px}
+.tk .bc{width:120px;margin:14px 20px 14px 0;background:repeating-linear-gradient(90deg,#141a2b 0 2px,transparent 2px 4px,#141a2b 4px 5px,transparent 5px 8px,#141a2b 8px 11px,transparent 11px 12px);opacity:.9}
+.wrap{max-width:1240px;margin:0 auto;padding:0 24px}
+.hd{display:flex;align-items:center;gap:16px;padding:22px 0}
+.hd .sp{flex:1}
+.ib{background:none;border:1px solid transparent;color:var(--tx2);width:36px;height:36px;border-radius:8px;cursor:pointer;display:grid;place-items:center}
+.ib:hover{border-color:var(--line2);color:var(--tx)}
+.bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;padding:22px 0}
+.dates{display:flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--line);border-radius:8px;padding:6px 10px}
+.dates input{background:none;border:0;color:var(--tx);font:13px 'JetBrains Mono',monospace;color-scheme:dark}
+:root[data-theme="light"] .dates input{color-scheme:light}
+.btn{border:0;border-radius:8px;padding:10px 16px;font:600 13px var(--fb);cursor:pointer}
+.btn.gold{background:var(--grad);color:#141a2b;font-weight:700}
+.seg{display:flex;background:var(--card);border:1px solid var(--line);border-radius:8px;padding:3px}
+.seg button{background:none;border:0;color:var(--tx2);padding:7px 12px;border-radius:6px;font:500 13px var(--fb);cursor:pointer}
+.seg button.on{background:var(--card2);color:var(--tx);box-shadow:inset 0 0 0 1px var(--line2)}
+.btn.out{background:var(--card);border:1px solid var(--line2);color:var(--tx);display:flex;gap:8px;align-items:center}
+.upd{font:12px/1.5 'JetBrains Mono',monospace;color:var(--tx3);text-align:right}
+.upd b{display:block;font-weight:500;color:var(--gold)}
+.card{background:linear-gradient(180deg,var(--card2),var(--card));border:1px solid var(--line);border-radius:16px;padding:22px;margin-bottom:22px}
+.ct{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:16px}
+.ct h2{margin:0;font:600 11.5px 'JetBrains Mono',monospace;letter-spacing:.16em;text-transform:uppercase;color:var(--gold)}
+.ct .bar-l{width:3px;height:18px;background:var(--gold);border-radius:2px}
+.ct .t2{font:800 20px var(--ft);background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;letter-spacing:-.01em}
+.chip{font:500 11px 'JetBrains Mono',monospace;color:var(--tx2);border:1px solid var(--line2);border-radius:20px;padding:3px 10px;text-transform:uppercase}
+.ct .r{margin-left:auto;font:12px 'JetBrains Mono',monospace;color:var(--tx3)}
+.note{font-size:12px;color:var(--tx3);margin:-8px 0 14px}
+/* funil */
+.funnel{display:flex;align-items:stretch;gap:0}
+.st{flex:1 1 0;min-width:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:2px;background:var(--card2);border:1px solid var(--line2);border-left:3px solid var(--gold);border-radius:10px;padding:12px 12px}
+.st .l{font:600 10px 'JetBrains Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--gold)}
+.st .v{font:700 clamp(18px,2.1vw,26px) 'JetBrains Mono',monospace;margin:6px 0 4px;white-space:nowrap}
+.st .s{font-size:11px;color:var(--tx3)}
+.rate{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;padding:0 6px;min-width:0;text-align:center}
+.rate .p{font:600 11px 'JetBrains Mono',monospace;padding:3px 8px;border-radius:12px}
+.rate .n{font:500 10px var(--fb);letter-spacing:.05em;text-transform:uppercase;color:var(--tx2)}
+.pill{display:inline-flex;gap:6px;align-items:center;background:var(--bg2);border:1px solid var(--line);border-radius:14px;padding:3px 9px;font:500 11px 'JetBrains Mono',monospace;color:var(--tx)}
+.pill i{font-style:normal;font-family:var(--fb);font-size:9px;letter-spacing:.06em;color:var(--tx3)}
+.g{color:var(--good)}.b{color:var(--bad)}
+.gbg{background:var(--goodbg);color:var(--good)}.bbg{background:var(--badbg);color:var(--bad)}.nbg{background:var(--bg2);color:var(--tx2)}
+.kpis{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;border-top:1px solid var(--line);margin-top:18px;padding-top:18px}
+.kpi .v{font:700 22px 'JetBrains Mono',monospace}
+.kpi .s{font-size:12px;color:var(--tx2)}.kpi .s em{font-style:normal;color:var(--tx3)}
+.proj{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
+.pb{background:var(--bg2);border:1px solid var(--line);border-radius:10px;padding:18px}
+.pb .v{font:700 30px 'JetBrains Mono',monospace}
+.pb .s{color:var(--tx2);font-size:13px}.pb .s2{color:var(--tx3);font-size:12px;margin-top:6px}
+.prog{height:6px;background:var(--line);border-radius:4px;margin-top:12px;overflow:hidden}.prog div{height:100%;background:var(--grad)}
+.foot{margin-top:12px;font-size:12px;color:var(--tx3)}
+/* tabelas */
+.tw{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{font:600 10px var(--fb);letter-spacing:.04em;text-transform:uppercase;color:var(--tx3);text-align:right;padding:8px 6px;border-bottom:1px solid var(--line2);white-space:normal;vertical-align:bottom;cursor:default}
+th.s{cursor:pointer}th.s:hover{color:var(--tx)}
+th:first-child,td:first-child{text-align:left}
+td{padding:9px 6px;border-bottom:1px solid var(--line);text-align:right;white-space:nowrap;font-family:'JetBrains Mono',monospace;font-size:12px}
+td:first-child{font-family:var(--fb);font-size:13px}
+tr.tot td{font-weight:700;border-top:1px solid var(--line2);border-bottom:0}
+tr.hj td{color:var(--tx2)}
+.cn{cursor:pointer;max-width:240px;overflow:hidden;text-overflow:ellipsis}
+.cn.full{white-space:normal;max-width:none;word-break:break-all}
+.grp th{border-bottom:0;padding-bottom:0;color:var(--gold);text-align:center}
+.sm{font-size:11px;color:var(--tx3)}
+.pk{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:16px}
+.pk .pb .v{font-size:24px}
+/* faixas */
+.fx{display:grid;gap:10px}
+.fr{display:grid;grid-template-columns:230px 1fr 150px;gap:14px;align-items:center}
+.fr .t{font-size:13px}.fr .q{font:12px 'JetBrains Mono',monospace;color:var(--tx2);text-align:right}
+.fr .bb{height:22px;background:var(--bg2);border-radius:5px;overflow:hidden}
+.fr .bb div{height:100%;background:var(--grad);opacity:.85;border-radius:5px}
+.fr .bb div.lo{background:var(--tx3);opacity:.5}
+/* criativos */
+.cg{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+.cc{background:var(--bg2);border:1px solid var(--line);border-radius:10px;overflow:hidden;display:flex;flex-direction:column}
+.cc .im{aspect-ratio:1;background:var(--card2) center/cover no-repeat;position:relative}
+.cc .rk{position:absolute;top:8px;left:8px;background:rgba(0,0,0,.7);color:#fff;font:700 11px 'JetBrains Mono',monospace;padding:2px 7px;border-radius:10px}
+.cc .bd{padding:10px 12px;display:flex;flex-direction:column;gap:6px}
+.cc .nm{font:500 10.5px 'JetBrains Mono',monospace;color:var(--tx2);word-break:break-all}
+.cc .mv{font:700 19px 'JetBrains Mono',monospace}
+.cc .ml{font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:var(--tx3)}
+.cc .gr{display:grid;grid-template-columns:1fr 1fr;gap:4px 8px;font-size:11px;color:var(--tx3)}
+.cc .gr b{display:block;font:600 12px 'JetBrains Mono',monospace;color:var(--tx)}
+.sub-h{font:600 12px var(--fb);letter-spacing:.06em;text-transform:uppercase;margin:18px 0 10px}
+
+@media (max-width:1120px){
+  .funnel{flex-direction:column}
+  .st{flex:none;display:grid;grid-template-columns:1fr auto;align-items:center;justify-items:start;text-align:left;gap:2px 10px}
+  .st .pill{justify-self:end}
+  .st .l{grid-column:1/-1}.st .v{margin:2px 0;font-size:24px}
+  .rate{flex-direction:row;flex-wrap:wrap;justify-content:center;padding:8px 0}
+  .tw table,.tw thead,.tw tbody,.tw tr,.tw td{display:block;width:100%}
+  .tw thead{display:none}
+  .tw tr{display:grid;grid-template-columns:1fr 1fr;gap:6px 14px;padding:12px 0;border-bottom:1px solid var(--line2)}
+  .tw td{border:0;padding:0;text-align:left;white-space:normal;font-size:13px}
+  .tw td:first-child{grid-column:1/-1;font-weight:600;font-size:14px}
+  .tw td:not(:first-child)::before{content:attr(data-l);display:block;font:500 9.5px 'JetBrains Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--tx3)}
+  .tw td:empty{display:none}
+  .cn{max-width:none;white-space:normal;word-break:break-all}
+  tr.tot td{border:0}
+}
+@media (max-width:1000px){.cg{grid-template-columns:repeat(3,1fr)}.kpis{grid-template-columns:repeat(3,1fr)}}
+@media (max-width:700px){.tk .bc{display:none}.tk .inf{gap:10px 14px;padding:12px 14px;min-width:0}.tk .inf b{font-size:13px}.hd{gap:8px}.tk .lg{padding:12px 14px}.tk .lg .vb{font-size:22px}.wrap{padding:0 16px}.proj,.pk{grid-template-columns:1fr}.cg{grid-template-columns:repeat(2,1fr)}.kpis{grid-template-columns:1fr 1fr}.fr{grid-template-columns:1fr;gap:4px}.fr .q{text-align:left}.card{padding:16px}}
+.err{padding:40px;text-align:center;color:var(--tx2)}
+</style>
+</head>
+<body>
+<header><div class="wrap hd">
+  <div class="tk" style="flex:1">
+    <div class="lg"><div class="a">PLANO DE <svg width="44" height="16" viewBox="0 0 44 16" fill="#141a2b"><path d="M2 13 L40 2 Q44 1 42 4 L30 9 L22 15 L19 15 L23 10 L12 13 Z"/><path d="M0 15h18v1H0z"/></svg></div><div class="vb">VOO<span>2027</span></div></div>
+    <div class="inf"><div>Painel<b id="tt">Metas de performance</b></div><div>Captação<b id="cap">—</b></div><div>Embarque<b>Seg 14 Dez · 19h</b></div><div>Onde<b>YouTube</b></div><div>Atualizado<b id="st">—</b></div></div>
+    <div class="bc"></div>
+  </div>
+  <button class="ib" id="th" title="Tema claro/escuro" aria-label="Tema"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button>
+</div></header>
+<main class="wrap">
+  <div class="bar">
+    <div class="dates"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--gold)"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+      <input type="date" id="d0"> <span style="color:var(--tx3)">→</span> <input type="date" id="d1"></div>
+    <button class="btn gold" id="ap">Aplicar</button>
+    <div class="seg" id="qk"><button data-q="tudo">Tudo</button><button data-q="ontem">Ontem</button><button data-q="hoje">Hoje</button><button data-q="7">7D</button></div>
+    <div style="flex:1"></div>
+    <span class="upd" id="up"></span>
+    <button class="btn out" id="rf"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 1 1-3-6.7L21 8"/><path d="M21 3v5h-5"/></svg>Atualizar dados</button>
+  </div>
+  <div id="app"><div class="err">Carregando…</div></div>
+</main>
+<script>
+const $=s=>document.querySelector(s);
+const nf=(n,d=0)=>isFinite(n)?n.toLocaleString('pt-BR',{minimumFractionDigits:d,maximumFractionDigits:d}):'—';
+const R=(n,d=0)=>isFinite(n)&&n!==null?'R$ '+nf(n,d):'—';
+const P=(n,d=2)=>isFinite(n)?nf(n,d)+'%':'—';
+const dv=(a,b)=>b?a/b:NaN;
+const ddmm=s=>s.slice(8,10)+'/'+s.slice(5,7);
+const addD=(s,n)=>{const d=new Date(s+'T12:00:00Z');d.setUTCDate(d.getUTCDate()+n);return d.toISOString().slice(0,10)};
+const ndias=(a,b)=>Math.round((new Date(b+'T12:00:00Z')-new Date(a+'T12:00:00Z'))/864e5)+1;
+let D,M,HOJE,F={a:null,b:null},CRI='cpq';
+// tema
+try{const t=localStorage.getItem('pdv-tema');if(t)document.documentElement.dataset.theme=t}catch(e){}
+$('#th').onclick=()=>{const r=document.documentElement;r.dataset.theme=r.dataset.theme==='light'?'dark':'light';try{localStorage.setItem('pdv-tema',r.dataset.theme)}catch(e){}};
+// cor pela meta: up=true quando maior é melhor
+const cls=(v,m,up)=>!isFinite(v)||!m?'':((up?v>=m:v<=m)?'g':'b');
+const bgc=(v,m,up)=>!isFinite(v)||!m?'nbg':((up?v>=m:v<=m)?'gbg':'bbg');
+
+// horários do GitHub Actions (Brasília): 6h47, 9h47, 12h47, 15h47, 18h47 e 21h47
+function proxima(){const b=new Date(Date.now()-3*3600e3),m=b.getUTCHours()*60+b.getUTCMinutes();
+  const S=[6,9,12,15,18,21].map(h=>h*60+47),n=S.find(x=>x>m);
+  const f=x=>String(Math.floor(x/60)).padStart(2,'0')+'h'+String(x%60).padStart(2,'0');
+  return n!==undefined?'às '+f(n):'amanhã às '+f(S[0])}
+async function carrega(nc){
+  const r=await fetch('data.json'+(nc?'?nc='+Date.now():''),{cache:nc?'no-store':'default'});
+  D=await r.json();M=D.cfg.metas;HOJE=D.coleta.slice(0,10);
+  $('#cap').textContent=ddmm(D.cfg.inicio)+' → '+ddmm(D.cfg.fim);
+  $('#st').textContent=ddmm(HOJE)+' · '+D.hora;
+  $('#up').innerHTML='Atualizado '+ddmm(HOJE)+' às '+D.hora+'<b>Próxima atualização '+proxima()+'</b>';
+  document.title=D.cfg.nome+' — Metas de Performance';
+  if(!F.a){F.a=D.cfg.inicio;F.b=D.cfg.fim}
+  $('#d0').value=F.a;$('#d1').value=F.b;$('#d0').min=$('#d1').min=D.cfg.inicio;$('#d0').max=$('#d1').max=D.cfg.fim;
+  desenha();
+}
+function agg(rows){const o={sp:0,im:0,cl:0,lpv:0};for(const r of rows){o.sp+=r[5];o.im+=r[6];o.cl+=r[7];o.lpv+=r[8]}return o}
+function ldsum(ls){return{n:ls.length,q:ls.reduce((s,l)=>s+l[5],0)}}
+const by=(arr,kf)=>{const m=new Map();for(const x of arr){const k=kf(x);if(!m.has(k))m.set(k,[]);m.get(k).push(x)}return m};
+
+function desenha(){
+  const a=F.a,b=F.b;
+  const md=D.md.filter(r=>r[0]>=a&&r[0]<=b), ld=D.leads.filter(l=>l[0]>=a&&l[0]<=b);
+  const T=agg(md),L=ldsum(ld);
+  document.querySelectorAll('#qk button').forEach(x=>x.classList.toggle('on',x.dataset.q===quick()));
+  // dias do período (hoje entra pela fração do dia)
+  const fimP=b<HOJE?b:HOJE;
+  const dc=fimP<a?0:ndias(a,fimP)-(fimP===HOJE?1-D.frac:0);
+  const totD=ndias(D.cfg.inicio,D.cfg.fim);
+  const mLeads=M.investimento/M.cpl, mQ=mLeads*M.tx_qualif/100;
+  const mDia=mLeads/totD,mQDia=mQ/totD, mInvP=M.investimento/totD*Math.max(dc,0);
+  const cpm=dv(T.sp*1000,T.im),ctr=dv(T.cl*100,T.im),con=dv(T.lpv*100,T.cl),cv=dv(L.n*100,T.lpv),tq=dv(L.q*100,L.n);
+  const cpl=dv(T.sp,L.n),cpq=dv(T.sp,L.q);
+  const st=(l,v,s)=>`<div class="st"><div class="l">${l}</div><div class="v">${v}</div>${s}</div>`;
+  const rt=(n,v,m,up,fm)=>`<div class="rate"><span class="p ${bgc(v,m,up)}">${fm(v)}</span><span class="n">${n}</span><span class="pill"><i>META</i>${fm(m)}</span></div>`;
+  let h=`<section class="card"><div class="ct"><span class="bar-l"></span><span class="t2">${D.cfg.nome}</span><span class="chip">Investimento no período · ${R(T.sp)}</span><span class="r">${ddmm(a)} → ${ddmm(b)}</span></div>
+  <div class="funnel">
+   <div class="st"><div class="l">CPM</div><div class="v ${cls(cpm,M.cpm,false)}">${R(cpm)}</div><span class="pill"><i>META</i>${R(M.cpm)}</span><div class="s" style="margin-top:6px">${nf(T.im)} impressões</div></div>
+   ${rt('CTR',ctr,M.ctr,true,v=>P(v))}
+   ${st('Cliques no link',nf(T.cl),`<div class="s">CPC ${R(dv(T.sp,T.cl),2)}</div>`)}
+   ${rt('Connect',con,M.connect,true,v=>P(v))}
+   ${st('Visitas LP',nf(T.lpv),`<div class="s">Custo/visita ${R(dv(T.sp,T.lpv),2)}</div>`)}
+   ${rt('Conv. página',cv,M.conv_pagina,true,v=>P(v))}
+   ${st('Leads',nf(L.n),`<span class="pill"><i>META</i>${nf(mLeads)}</span>`)}
+   ${rt('Tx qualificação',tq,M.tx_qualif,true,v=>P(v))}
+   ${st('Leads qualificados',nf(L.q),`<span class="pill"><i>META</i>${nf(mQ)}</span>`)}
+  </div>
+  <div class="kpis">
+   <div class="kpi"><div class="v">${R(T.sp)}</div><div class="s">Investimento <em>(meta ${R(M.investimento)})</em></div></div>
+   <div class="kpi"><div class="v ${cls(cpl,M.cpl,false)}">${R(cpl)}</div><div class="s">Custo por lead <em>(meta ${R(M.cpl)})</em></div></div>
+   <div class="kpi"><div class="v ${cls(cpq,M.cpq,false)}">${R(cpq)}</div><div class="s">Custo por lead qualificado <em>(meta ${R(M.cpq)})</em></div></div>
+   <div class="kpi"><div class="v ${cls(dv(L.n,dc),mDia,true)}">${nf(dv(L.n,dc))}</div><div class="s">Ritmo leads/dia <em>(meta ${nf(mDia)})</em></div></div>
+   <div class="kpi"><div class="v ${cls(dv(L.q,dc),mQDia,true)}">${nf(dv(L.q,dc))}</div><div class="s">Ritmo leads qualificados/dia <em>(meta ${nf(mQDia)})</em></div></div>
+  </div></section>`;
+
+  // projeção: sempre sobre a captação inteira
+  {const all=agg(D.md),AL=ldsum(D.leads);const dcap=ndias(D.cfg.inicio,HOJE<D.cfg.fim?HOJE:D.cfg.fim)-(HOJE<=D.cfg.fim?1-D.frac:0);
+   const k=totD/Math.max(dcap,0.01),pl=AL.n*k,pq=AL.q*k,pi=all.sp*k,falta=Math.max(0,Math.ceil(totD-dcap));
+   h+=`<section class="card"><div class="ct"><h2>Projeção no ritmo atual</h2><span class="r">${nf(dcap,1)} de ${totD} dias · faltam ${falta}</span></div>
+   <div class="proj">
+    <div class="pb"><div class="v ${cls(pl,mLeads,true)}">${nf(pl)}</div><div class="s">Leads projetados (meta ${nf(mLeads)})</div><div class="s2">${nf(pl/mLeads*100)}% da meta · hoje ${nf(AL.n)}</div><div class="prog"><div style="width:${Math.min(100,AL.n/mLeads*100)}%"></div></div></div>
+    <div class="pb"><div class="v ${cls(pq,mQ,true)}">${nf(pq)}</div><div class="s">Leads qualificados projetados (meta ${nf(mQ)})</div><div class="s2">${nf(pq/mQ*100)}% da meta · hoje ${nf(AL.q)}</div><div class="prog"><div style="width:${Math.min(100,AL.q/mQ*100)}%"></div></div></div>
+    <div class="pb"><div class="v">${R(all.sp)}</div><div class="s">Investido até agora</div><div class="v" style="margin-top:12px">${R(pi)}</div><div class="s">Investimento projetado (meta ${R(M.investimento)})</div></div>
+   </div><div class="foot">Média ${R(dv(all.sp,dcap))}/dia · Custo/lead qualificado projetado ${R(dv(pi,pq))} · captação de ${ddmm(D.cfg.inicio)} a ${ddmm(D.cfg.fim)}</div></section>`;}
+
+  // dia a dia
+  {const dm=by(md,r=>r[0]),dl=by(ld,l=>l[0]);const dias=[...new Set([...dm.keys(),...dl.keys()])].sort();
+   h+=`<section class="card"><div class="ct"><h2>Funil dia a dia</h2></div><div class="note">Metas: CPM ${R(M.cpm)} · CTR ${P(M.ctr,0)} · Connect ${P(M.connect,0)} · Conv. página ${P(M.conv_pagina,0)} · Tx qualif. ${P(M.tx_qualif,0)}</div><div class="tw"><table><thead><tr><th>Dia</th><th>Investimento</th><th>Impressões</th><th>CPM</th><th>Cliques</th><th>CTR</th><th>Visitas</th><th>Connect</th><th>Leads</th><th>Conv. página</th><th>Qualificados</th><th>Tx qualif.</th><th>Custo/lead</th><th>Custo/qualif.</th></tr></thead><tbody>`;
+   for(const d of dias){const t=agg(dm.get(d)||[]),l=ldsum(dl.get(d)||[]);const hj=d===HOJE;
+     const c=(v,m,up)=>hj?'':cls(v,m,up);
+     h+=`<tr class="${hj?'hj':''}"><td>${ddmm(d)}${hj?` · hoje até ${D.hora}`:''}</td><td>${R(t.sp)}</td><td>${nf(t.im)}</td><td class="${c(dv(t.sp*1000,t.im),M.cpm)}">${R(dv(t.sp*1000,t.im))}</td><td>${nf(t.cl)}</td><td class="${c(dv(t.cl*100,t.im),M.ctr,1)}">${P(dv(t.cl*100,t.im))}</td><td>${nf(t.lpv)}</td><td class="${c(dv(t.lpv*100,t.cl),M.connect,1)}">${P(dv(t.lpv*100,t.cl),0)}</td><td>${nf(l.n)}</td><td class="${c(dv(l.n*100,t.lpv),M.conv_pagina,1)}">${P(dv(l.n*100,t.lpv),0)}</td><td>${nf(l.q)}</td><td class="${c(dv(l.q*100,l.n),M.tx_qualif,1)}">${P(dv(l.q*100,l.n),0)}</td><td class="${c(dv(t.sp,l.n),M.cpl)}">${R(dv(t.sp,l.n))}</td><td class="${c(dv(t.sp,l.q),M.cpq)}">${R(dv(t.sp,l.q))}</td></tr>`}
+   h+=`<tr class="tot"><td>Total</td><td>${R(T.sp)}</td><td>${nf(T.im)}</td><td>${R(cpm)}</td><td>${nf(T.cl)}</td><td>${P(ctr)}</td><td>${nf(T.lpv)}</td><td>${P(con,0)}</td><td>${nf(L.n)}</td><td>${P(cv,0)}</td><td>${nf(L.q)}</td><td>${P(tq,0)}</td><td>${R(cpl)}</td><td>${R(cpq)}</td></tr></tbody></table></div></section>`;}
+
+  // campanhas
+  {const cm=by(md,r=>r[1]),cl=by(ld,l=>l[1]);const sem=ldsum(cl.get(-1)||[]);
+   const rows=D.camps.map((c,i)=>({c,t:agg(cm.get(i)||[]),l:ldsum(cl.get(i)||[])})).filter(x=>x.t.sp>0||x.l.n>0).sort((x,y)=>y.t.sp-x.t.sp);
+   h+=`<section class="card"><div class="ct"><h2>Campanhas ${D.cfg.filtro_campanha}</h2></div><div class="note">Tráfego direto da Meta · leads pelo formulário do HubSpot (utm_campaign) · ${nf(sem.n)} lead${sem.n===1?'':'s'} sem campanha identificada · clique no nome para ver completo</div><div class="tw"><table><thead><tr><th>Campanha</th><th>Investimento</th><th>Impressões</th><th>CPM</th><th>Cliques</th><th>CPC</th><th>Visitantes LP</th><th>Leads</th><th>Custo/lead</th><th>Leads qualif.</th><th>Custo/lead qualif.</th></tr></thead><tbody>`;
+   for(const x of rows){const t=x.t,l=x.l;h+=`<tr><td class="cn" title="${x.c.nome}" onclick="this.classList.toggle('full')">${x.c.nome}</td><td>${R(t.sp)}</td><td>${nf(t.im)}</td><td>${R(dv(t.sp*1000,t.im))}</td><td>${nf(t.cl)}</td><td>${R(dv(t.sp,t.cl),2)}</td><td>${nf(t.lpv)}</td><td>${nf(l.n)}</td><td class="${cls(dv(t.sp,l.n),M.cpl)}">${R(dv(t.sp,l.n))}</td><td>${nf(l.q)}</td><td class="${cls(dv(t.sp,l.q),M.cpq)}">${R(dv(t.sp,l.q))}</td></tr>`}
+   if(sem.n)h+=`<tr><td style="color:var(--tx3)">Sem campanha identificada</td><td></td><td></td><td></td><td></td><td></td><td></td><td>${nf(sem.n)}</td><td></td><td>${nf(sem.q)}</td><td></td></tr>`;
+   h+=`<tr class="tot"><td>Total</td><td>${R(T.sp)}</td><td>${nf(T.im)}</td><td>${R(cpm)}</td><td>${nf(T.cl)}</td><td>${R(dv(T.sp,T.cl),2)}</td><td>${nf(T.lpv)}</td><td>${nf(L.n)}</td><td>${R(cpl)}</td><td>${nf(L.q)}</td><td>${R(cpq)}</td></tr></tbody></table></div></section>`;}
+
+  // quente x frio
+  {const tm=by(md,r=>D.camps[r[1]].temp),tl=by(ld,l=>l[1]<0?'Sem tag':D.camps[l[1]].temp);
+   const ks=['Quente','Frio','Sem tag'].filter(k=>tm.has(k)||tl.has(k));
+   h+=`<section class="card"><div class="ct"><h2>Público quente × frio</h2></div><div class="tw"><table><thead><tr class="grp"><th></th><th colspan="5">Captação</th><th colspan="3">Mídia</th><th colspan="3">Tráfego</th></tr><tr><th>Público</th><th>Investimento</th><th>Leads</th><th>Custo/lead</th><th>Leads qualificados</th><th>Custo/lead qualif.</th><th>CPM</th><th>CTR</th><th>Connect</th><th>Impressões</th><th>Cliques</th><th>CPC</th></tr></thead><tbody>`;
+   const row=(k,t,l,tot)=>`<tr class="${tot?'tot':''}"><td>${k}</td><td>${t.sp?R(t.sp):''}</td><td>${nf(l.n)}</td><td class="${tot||!t.sp?'':cls(dv(t.sp,l.n),M.cpl)}">${t.sp?R(dv(t.sp,l.n)):'—'}</td><td>${nf(l.q)} <span class="sm">(${P(dv(l.q*100,L.q),1)})</span></td><td class="${tot||!t.sp?'':cls(dv(t.sp,l.q),M.cpq)}">${t.sp?R(dv(t.sp,l.q)):'—'}</td><td>${t.im?R(dv(t.sp*1000,t.im)):''}</td><td>${t.im?P(dv(t.cl*100,t.im)):''}</td><td>${t.cl?P(dv(t.lpv*100,t.cl)):''}</td><td>${t.im?nf(t.im):''}</td><td>${t.cl?nf(t.cl):''}</td><td>${t.cl?R(dv(t.sp,t.cl),2):''}</td></tr>`;
+   for(const k of ks)h+=row(k,agg(tm.get(k)||[]),ldsum(tl.get(k)||[]));
+   h+=row('Total',T,L,1)+`</tbody></table></div></section>`;}
+
+  // páginas
+  {const pm=by(md,r=>r[3]),pl=by(ld,l=>l[3]);const ks=[...new Set([...pm.keys(),...pl.keys()])].map(i=>({k:D.paginas[i],t:agg(pm.get(i)||[]),l:ldsum(pl.get(i)||[])})).sort((x,y)=>y.l.n-x.l.n||y.t.sp-x.t.sp);
+   h+=`<section class="card"><div class="ct"><h2>Páginas de captação</h2></div><div class="pk">
+    <div class="pb"><div class="ml sm">VIEWS DE PÁGINA</div><div class="v">${nf(T.lpv)}</div><div class="s2">no Meta</div></div>
+    <div class="pb"><div class="ml sm">CONVERSÃO PÁGINA</div><div class="v ${cls(cv,M.conv_pagina,true)}">${P(cv,1)}</div><div class="s2">leads (HubSpot) ÷ views (Meta) · meta ${P(M.conv_pagina,0)}</div></div>
+    <div class="pb"><div class="ml sm">CONNECT RATE</div><div class="v ${cls(con,M.connect,true)}">${P(con,1)}</div><div class="s2">views ÷ cliques no link · meta ${P(M.connect,0)}</div></div></div>
+    <div class="tw"><table><thead><tr><th>Página</th><th>Leads</th><th>Leads qualificados</th><th>% qualif.</th><th>Conversão</th><th>Connect rate</th><th>Investimento</th><th>Custo/lead</th><th>Custo/lead qualif.</th></tr></thead><tbody>`;
+   const url={};for(const[k,v]of Object.entries(D.cfg.paginas))url[v]=k;
+   for(const x of ks){const t=x.t,l=x.l;h+=`<tr><td>${x.k} <span class="sm">${url[x.k]?'/'+url[x.k]:''}</span></td><td>${nf(l.n)}</td><td>${nf(l.q)}</td><td class="${cls(dv(l.q*100,l.n),M.tx_qualif,true)}">${P(dv(l.q*100,l.n),0)}</td><td class="${cls(dv(l.n*100,t.lpv),M.conv_pagina,true)}">${P(dv(l.n*100,t.lpv),1)}</td><td class="${cls(dv(t.lpv*100,t.cl),M.connect,true)}">${P(dv(t.lpv*100,t.cl),0)}</td><td>${R(t.sp)}</td><td class="${cls(dv(t.sp,l.n),M.cpl)}">${R(dv(t.sp,l.n))}</td><td class="${cls(dv(t.sp,l.q),M.cpq)}">${R(dv(t.sp,l.q))}</td></tr>`}
+   h+=`<tr class="tot"><td>Total</td><td>${nf(L.n)}</td><td>${nf(L.q)}</td><td>${P(tq,0)}</td><td>${P(cv,1)}</td><td>${P(con,0)}</td><td>${R(T.sp)}</td><td>${R(cpl)}</td><td>${R(cpq)}</td></tr></tbody></table></div></section>`;}
+
+  // faixas
+  {const fm=by(ld,l=>l[4]);const ks=[...fm.keys()].map(k=>({k,n:fm.get(k).length})).sort((x,y)=>y.n-x.n);const mx=Math.max(1,...ks.map(x=>x.n));
+   h+=`<section class="card"><div class="ct"><h2>Faixa de faturamento</h2><span class="r">custo = investimento ÷ leads da faixa</span></div><div class="fx">`;
+   for(const x of ks)h+=`<div class="fr"><div class="t">${x.k<0?'Não informado':D.faixas[x.k]}</div><div class="bb"><div class="${x.k===0?'lo':''}" style="width:${x.n/mx*100}%"></div></div><div class="q">${nf(x.n)} (${P(x.n*100/L.n,1)}) · ${R(dv(T.sp,x.n))}</div></div>`;
+   h+=`</div></section>`;}
+
+  // criativos
+  {const cm=by(md,r=>r[2]),cl=by(ld,l=>l[2]);
+   const all=D.nomes.map((n,i)=>{const t=agg(cm.get(i)||[]),l=ldsum(cl.get(i)||[]);const anuncios=new Set((cm.get(i)||[]).map(r=>r[1])).size;return{n,t,l,anuncios,cpq:dv(t.sp,l.q),ctr:dv(t.cl*100,t.im)}}).filter(x=>x.t.sp>0);
+   const ok=all.filter(x=>CRI==='cpq'?x.l.q>0:x.t.im>=300);const semc=all.length-ok.length;
+   ok.sort((x,y)=>CRI==='cpq'?x.cpq-y.cpq:y.ctr-x.ctr);
+   const half=Math.min(10,Math.ceil(ok.length/2)),best=ok.slice(0,half),worst=ok.slice(half).reverse().slice(0,10);
+   const card=(x,i)=>{const th=(D.cre[x.n]||{}).thumb;const main=CRI==='cpq'?[R(x.cpq,2),'Custo/lead qualificado',cls(x.cpq,M.cpq)]:[P(x.ctr),'CTR',cls(x.ctr,M.ctr,true)];
+     return `<div class="cc"><div class="im" style="${th?`background-image:url('${th}')`:''}"><span class="rk">#${i+1}</span></div><div class="bd"><div class="nm">${x.n}</div><div><div class="mv ${main[2]}">${main[0]}</div><div class="ml">${main[1]}</div></div><div class="gr"><div>Leads<b>${nf(x.l.n)}</b></div><div>Qualificados<b>${nf(x.l.q)}</b></div><div>${CRI==='cpq'?'CTR':'Custo/qualif.'}<b>${CRI==='cpq'?P(x.ctr):R(x.cpq,2)}</b></div><div>Custo/lead<b>${R(dv(x.t.sp,x.l.n),2)}</b></div><div style="grid-column:span 2">Investimento · ${x.anuncios} campanha${x.anuncios===1?'':'s'}<b>${R(x.t.sp,2)}</b></div></div></div></div>`};
+   h+=`<section class="card"><div class="ct"><h2>Criativos · ${CRI==='cpq'?'custo por lead qualificado':'CTR'}</h2><div class="seg" style="margin-left:auto" id="cri"><button data-c="cpq" class="${CRI==='cpq'?'on':''}">Custo/lead qualificado</button><button data-c="ctr" class="${CRI==='ctr'?'on':''}">CTR</button></div></div>
+   <div class="note">Mesmo criativo somado nas ${D.camps.length} campanhas · lead ligado ao criativo pelo utm_term do formulário${CRI==='ctr'?' · só criativos com 300+ impressões':''}</div>
+   <div class="sub-h g">Melhores criativos</div><div class="cg">${best.map(card).join('')}</div>
+   ${worst.length?`<div class="sub-h b">Piores criativos</div><div class="cg">${worst.map(card).join('')}</div>`:''}
+   <div class="foot">${CRI==='cpq'?'Sem custo calculável (sem lead qualificado no período)':'Com menos de 300 impressões'} · ${semc} criativo${semc===1?'':'s'}</div></section>`;}
+
+  $('#app').innerHTML=h;
+  document.querySelectorAll('.tw table').forEach(t=>{const hs=t.querySelectorAll('thead tr:last-child th');const L=[...hs].map(x=>x.textContent);t.querySelectorAll('tbody tr').forEach(r=>[...r.children].forEach((c,i)=>c.dataset.l=L[i]||''))});
+  document.querySelectorAll('#cri button').forEach(x=>x.onclick=()=>{CRI=x.dataset.c;desenha()});
+}
+function quick(){const fim=D.cfg.fim;
+  if(F.a===D.cfg.inicio&&F.b===fim)return'tudo';if(F.a===HOJE&&F.b===HOJE)return'hoje';
+  const o=addD(HOJE,-1);if(F.a===o&&F.b===o)return'ontem';const s=addD(HOJE,-6);if(F.b===HOJE&&F.a===(s<D.cfg.inicio?D.cfg.inicio:s))return'7';return''}
+document.querySelectorAll('#qk button').forEach(x=>x.onclick=()=>{const q=x.dataset.q,fim=D.cfg.fim;
+  if(q==='tudo'){F.a=D.cfg.inicio;F.b=fim}else if(q==='hoje'){F.a=F.b=HOJE}else if(q==='ontem'){F.a=F.b=addD(HOJE,-1)}else{F.a=addD(HOJE,-6);F.b=HOJE}
+  if(F.a<D.cfg.inicio)F.a=D.cfg.inicio;$('#d0').value=F.a;$('#d1').value=F.b;desenha()});
+$('#ap').onclick=()=>{const a=$('#d0').value,b=$('#d1').value;if(a&&b&&a<=b){F.a=a;F.b=b;desenha()}};
+$('#rf').onclick=async()=>{const b=$('#rf');b.disabled=true;b.lastChild.textContent='Atualizando…';try{await carrega(1)}catch(e){alert('Não consegui baixar os dados agora.')}b.disabled=false;b.lastChild.textContent='Atualizar dados'};
+carrega().catch(e=>{$('#app').innerHTML='<div class="err">Não consegui carregar os dados.</div>';console.error(e)});
+</script>
+</body>
+</html>
